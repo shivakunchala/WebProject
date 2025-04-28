@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Calculator</title>
+<style>
+    body{
+        background-color:rgb(110, 204, 230);
+    }
+    *{
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    .wrap{
+        padding: 40px;
+        width: 390px;
+        margin: auto;
+        height: auto;
+        background: black;
+        border-radius: 60px;
+        }
+        input[type=text]{
+            width: 100%;
+            padding: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        input[type=button]{
+            width: 70px;
+            padding: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 30px;
+            background-color:rgb(162, 189, 9);
+        }
+        #del{
+            width: 100%;
+        }
+        
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <form name="cal">
+            <input type="text" name="display" id="display" style="margin-bottom: 25px;">
+            <div>
+            <input type="button" onclick="clearDisplay()" value="AC"id="AC">
+            <input type="button" onclick="clearDisplay()" value="x">
+            <input type="button" onclick="getButtonInput('%')" value="%">
+            <input type="button" onclick="getButtonInput('÷')" value="÷" style="margin-bottom: 18px;">
+            
+            <input type="button" onclick="getButtonInput('7')" value="7">
+            <input type="button" onclick="getButtonInput('8')" value="8">
+            <input type="button" onclick="getButtonInput('9')" value="9">
+            <input type="button" onclick="getButtonInput('*')" value="*" style="margin-bottom: 18px;">
+            
+            <input type="button" onclick="getButtonInput('4')" value="4">
+            <input type="button" onclick="getButtonInput('5')" value="5">
+            <input type="button" onclick="getButtonInput('6')" value="6">
+            <input type="button" onclick="getOperationInput('-')" value="-" style="margin-bottom: 18px;">
+            
+            <input type="button" onclick="getButtonInput('1')" value="1">
+            <input type="button" onclick="getButtonInput('2')" value="2">
+            <input type="button" onclick="getButtonInput('3')" value="3">
+            <input type="button" onclick="getOperationInput('+')" value="+" style="margin-bottom: 18px;">
+            
+            <input type="button" onclick="getOperationInput('/')" value="/">
+            <input type="button" onclick="getButtonInput('0')" value="0">
+            <input type="button" onclick="getButtonInput('.')" value=".">
+            <input type="button" onclick="doOperation('=')" value="=" style="margin-bottom: 18px;">
+
+            <input type="button" onclick="clearDisplay()" id="del" value="DELETE">
+        </form>
+    </div>
+    <script type="text/javascript">
+let displayVal = document.getElementById("display")
+        let value1 = null
+        let operatorSign = null
+
+        function getButtonInput(number) {
+            displayVal.value += number
+        }
+
+        function getOperationInput(operator) {
+            if (displayVal.value === "") return
+            value1 = Number(displayVal.value)
+            operatorSign = operator
+            displayVal.value = ""
+        }
+
+        function doOperation() {
+            if (value1 === null || displayVal.value === "") return;
+
+            let value2 = Number(displayVal.value)
+            let result = 0
+
+            if (operatorSign === "+") {
+                result = value1 + value2
+            } else if (operatorSign === "-") {
+                result = value1 - value2;
+            } else if (operatorSign === "*") {
+                result = value1 * value2
+            } else if (operatorSign === "/") {
+                result = value1 / value2
+            }
+
+
+            displayVal.value = result;
+            value1 = null;
+            operatorSign = null;
+        }
+
+        function clearDisplay() {
+            displayVal.value = ""
+            value1 = null
+            operatorSign = null
+        }
+
+        function deleteLast() {
+            displayVal.value = displayVal.value
+        }
+  
+
+    </script>
+</body>
+</html>
